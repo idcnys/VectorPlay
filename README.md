@@ -27,6 +27,35 @@ npm install three
 
 ## Quick Start
 
+### Option 1: Using CLI (Recommended for beginners)
+
+Create a new project with template files:
+
+```bash
+# Create a new directory and project
+npx vectorplay@latest create my-vector-app
+cd my-vector-app
+npm run dev
+
+# Or create in current directory
+npx vectorplay@latest create .
+npm run dev
+```
+
+That's it! The CLI automatically:
+
+- Creates template files (`index.html`, `main.js`, `package.json`)
+- Installs all dependencies (`vectorplay`, `three`, `vite`)
+- Sets up the development environment
+
+Then just run `npm run dev` and open http://localhost:5173
+
+### Option 2: Manual setup
+
+```bash
+npm install vectorplay
+```
+
 ```javascript
 import { MainFrame, Vector } from "vectorplay";
 
@@ -230,8 +259,8 @@ import { MainFrame, Vector } from "vectorplay";
 
 const scene = new MainFrame();
 
-const vec1 = new Vector(3, 4, 0);  // Vector to project
-const vec2 = new Vector(1, 0, 0);  // Vector to project onto
+const vec1 = new Vector(3, 4, 0); // Vector to project
+const vec2 = new Vector(1, 0, 0); // Vector to project onto
 
 // Show both vectors and the projection
 scene.addVector(vec1);
@@ -263,6 +292,29 @@ console.log(`Dot product: ${dotProduct}`); // 11
 // Scale a vector
 vec1.scale(2); // vec1 is now (6, 8, 0)
 ```
+
+## CLI Tool
+
+VectorPlay includes a CLI tool for quick project setup:
+
+```bash
+# Create a new VectorPlay project (automatically installs dependencies)
+npx vectorplay@latest create my-vector-app
+
+# Create in current directory (automatically installs dependencies)
+npx vectorplay@latest create .
+
+# Show help
+npx vectorplay@latest
+```
+
+The CLI will:
+
+- Create `index.html`, `main.js`, and `package.json` files
+- Automatically install all dependencies (`vectorplay`, `three`, `vite`)
+- Set up a ready-to-run development environment
+
+Just run `npm run dev` after the CLI finishes!
 
 ## Browser Usage
 
@@ -303,6 +355,7 @@ For direct browser usage without a bundler:
 ## Changelog
 
 ### Version 1.1.0 (Latest)
+
 - ✨ **New Vector Methods:**
   - `scale(k)`: Scale vector by factor k
   - `value()`: Calculate vector magnitude
@@ -313,6 +366,7 @@ For direct browser usage without a bundler:
 - 🎨 **Improved API**: More comprehensive vector mathematics support
 
 ### Version 1.0.0
+
 - 🎉 Initial release
 - Basic vector visualization and operations
 - Vector addition, subtraction, cross product

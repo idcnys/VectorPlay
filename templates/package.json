@@ -1,0 +1,27 @@
+{
+  "name": "my-vectorplay-app",
+  "version": "1.0.0",
+  "description": "A VectorPlay application for 3D vector visualization",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vectorplay": "^1.2.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "keywords": [
+    "vectorplay",
+    "3d",
+    "vectors",
+    "visualization",
+    "threejs"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

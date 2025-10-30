@@ -30,7 +30,7 @@ class MainFrame {
     document.body.appendChild(this.labelRenderer.domElement);
 
     //grid,axis
-    const grid = new THREE.GridHelper(grid_length, grid_length, 0x00ffff, 0x333333);
+    const grid = new THREE.GridHelper(grid_length, grid_length, "grey", 0x333333);
     this.scene.add(grid);
     const xyz_axis = new THREE.AxesHelper(axis_length);
     this.scene.add(xyz_axis);
@@ -100,15 +100,29 @@ class MainFrame {
 
     this.addPoint(vec.x+origin.x, vec.y+origin.y, vec.z+origin.z, "V");
   }
+  addLine(from, to, color = 0x00ffff, dash = 0.3, gap = 0.2) {
+  const points = [new THREE.Vector3(from.x, from.y, from.z), new THREE.Vector3(to.x, to.y, to.z)];
+  const geometry = new THREE.BufferGeometry().setFromPoints(points);
+
+  const material = new THREE.LineDashedMaterial({color,dashSize: dash,gapSize: gap});
+
+  const line = new THREE.Line(geometry, material);
+  line.computeLineDistances();
+  this.scene.add(line);
+}
+
 
   plotSum(vector1, vector2){
     this.addVector(vector1);
     this.addVector(vector2, false, vector1);
     vector1.add(vector2);
-    this.addVector(vector1);
+    this.addVector(vector1,false,undefined,"green");
+    this.addLine(new Vector(0,0,0),vector2);
+    this.addLine(vector1,vector2);
   }
 
   plotDifference(vector1, vector2){
+    this.addVector(vector2,false,undefined,"grey");
     vector2.opposite();
     this.plotSum(vector1, vector2);
   }
@@ -117,7 +131,7 @@ class MainFrame {
     this.addVector(vector1);
     this.addVector(vector2);
     let vec3 = vector1.multiply(vector2);
-    this.addVector(vec3);
+    this.addVector(vec3,false,undefined,"green");
   }
 
   plotScaled(vec, k){
@@ -127,11 +141,14 @@ class MainFrame {
     this.addVector(vec);
   }
   plotProjection(ofvec1, onvec2){
+    this.addVector(ofvec1);
+    this.addVector(onvec2);
     const dp = ofvec1.dotProduct(onvec2);
     const lenSq = onvec2.value() ** 2;
     const proj = new Vector(onvec2.x, onvec2.y, onvec2.z);
     proj.scale(dp / lenSq);
     this.addVector(proj,true,undefined,"green");
+    this.addLine(proj,ofvec1);
 }
 
 
@@ -205,13 +222,10 @@ class Vector {
 
 var mf = new MainFrame("black", 100, 7);
 var v1 = new Vector(5, 5, 0);
-var v2 = new Vector(10, 0, 0);
-
-mf.addVector(v1);
-mf.addVector(v2);
-mf.plotProjection(v1,v2);
+var v2 = new Vector(10, -9, 0);
 
 // mf.plotSum(v1, v2);
-// mf.plotDifference(v1, v2);
+// mf.plotProjection(v1, v2);
+mf.plotDifference(v1, v2);
 // mf.plotCross(v1, v2);
 mf.runInloop();
