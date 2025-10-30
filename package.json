@@ -1,0 +1,45 @@
+{
+  "name": "vectorplay",
+  "version": "1.0.0",
+  "description": "A 3D vector simulation and visualization library built with Three.js for educational purposes",
+  "main": "dist/vectorplay.js",
+  "module": "src/index.js",
+  "files": [
+    "dist/",
+    "src/",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "3d",
+    "vectors", 
+    "simulation",
+    "threejs",
+    "education",
+    "math",
+    "visualization",
+    "coordinate-system"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/idcnys/VectorPlay.git"
+  },
+  "homepage": "https://github.com/idcnys/VectorPlay#readme",
+  "bugs": {
+    "url": "https://github.com/idcnys/VectorPlay/issues"
+  },
+  "peerDependencies": {
+    "three": "^0.180.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vite": "^7.1.12",
+    "three": "^0.180.0"
+  }
+}
