@@ -5,7 +5,8 @@ A powerful 3D vector simulation and visualization library built with Three.js fo
 ## Features
 
 - 🎯 **3D Vector Visualization**: Render vectors as arrows in 3D space
-- 📐 **Mathematical Operations**: Visualize vector addition, subtraction, cross products, and scaling
+- 📐 **Mathematical Operations**: Visualize vector addition, subtraction, cross products, scaling, and projections
+- 🧮 **Vector Calculations**: Dot products, magnitude calculation, and unit vector generation
 - 🏷️ **Point and Label System**: Add labeled points and coordinate displays
 - 🎮 **Interactive Controls**: Built-in orbit controls for exploring 3D scenes
 - 📏 **Grid and Axis Helpers**: Visual reference system with customizable grid and axes
@@ -105,6 +106,15 @@ Visualize cross product of two vectors.
 
 Visualize a scaled vector.
 
+##### `plotProjection(ofvec1, onvec2)`
+
+Visualize the projection of one vector onto another.
+
+**Parameters:**
+
+- `ofvec1` (Vector): Vector to be projected
+- `onvec2` (Vector): Vector to project onto
+
 ##### `runInloop()`
 
 Start the animation loop (call this last).
@@ -132,6 +142,36 @@ Subtract another vector from this vector (modifies the current vector).
 ##### `opposite()`
 
 Negate the vector (multiply by -1).
+
+##### `scale(k)`
+
+Scale the vector by a factor k (modifies the current vector).
+
+**Parameters:**
+
+- `k` (number): Scaling factor
+
+##### `value()`
+
+Calculate and return the magnitude (length) of the vector.
+
+**Returns:** `number` - The magnitude of the vector
+
+##### `unitVector()`
+
+Get the unit vector (normalized vector with magnitude 1).
+
+**Returns:** `Vector` - A new Vector representing the unit vector
+
+##### `dotProduct(vector)`
+
+Calculate the dot product with another vector.
+
+**Parameters:**
+
+- `vector` (Vector): The other vector
+
+**Returns:** `number` - The dot product result
 
 ##### `multiply(vector2)`
 
@@ -183,6 +223,47 @@ scene.plotCross(vec1, vec2);
 scene.runInloop();
 ```
 
+### Vector Projection
+
+```javascript
+import { MainFrame, Vector } from "vectorplay";
+
+const scene = new MainFrame();
+
+const vec1 = new Vector(3, 4, 0);  // Vector to project
+const vec2 = new Vector(1, 0, 0);  // Vector to project onto
+
+// Show both vectors and the projection
+scene.addVector(vec1);
+scene.addVector(vec2);
+scene.plotProjection(vec1, vec2);
+
+scene.runInloop();
+```
+
+### Vector Calculations
+
+```javascript
+import { Vector } from "vectorplay";
+
+const vec1 = new Vector(3, 4, 0);
+const vec2 = new Vector(1, 2, 2);
+
+// Calculate magnitude
+console.log(`Magnitude of vec1: ${vec1.value()}`); // 5
+
+// Get unit vector
+const unitVec = vec1.unitVector();
+console.log(`Unit vector:`, unitVec); // Vector with magnitude 1
+
+// Calculate dot product
+const dotProduct = vec1.dotProduct(vec2);
+console.log(`Dot product: ${dotProduct}`); // 11
+
+// Scale a vector
+vec1.scale(2); // vec1 is now (6, 8, 0)
+```
+
 ## Browser Usage
 
 For direct browser usage without a bundler:
@@ -218,6 +299,24 @@ For direct browser usage without a bundler:
 - Three.js ^0.180.0
 - Modern browser with ES6 module support
 - WebGL support
+
+## Changelog
+
+### Version 1.1.0 (Latest)
+- ✨ **New Vector Methods:**
+  - `scale(k)`: Scale vector by factor k
+  - `value()`: Calculate vector magnitude
+  - `unitVector()`: Get normalized unit vector
+  - `dotProduct(vector)`: Calculate dot product with another vector
+- ✨ **New Visualization:**
+  - `plotProjection(vec1, vec2)`: Visualize vector projection
+- 🎨 **Improved API**: More comprehensive vector mathematics support
+
+### Version 1.0.0
+- 🎉 Initial release
+- Basic vector visualization and operations
+- Vector addition, subtraction, cross product
+- 3D scene management with Three.js
 
 ## License
 

@@ -1,6 +1,6 @@
 import * as _ from "three";
-import { Controls as v, Vector3 as f, MOUSE as S, TOUCH as D, Quaternion as L, Spherical as j, Vector2 as E, Ray as q, Plane as G, MathUtils as B, Matrix4 as Z, Object3D as Q } from "three";
-const k = { type: "change" }, R = { type: "start" }, K = { type: "end" }, T = new q(), N = new G(), $ = Math.cos(70 * B.DEG2RAD), d = new f(), m = 2 * Math.PI, r = {
+import { Controls as X, Vector3 as f, MOUSE as S, TOUCH as D, Quaternion as L, Spherical as j, Vector2 as E, Ray as q, Plane as G, MathUtils as B, Matrix4 as Z, Object3D as Q } from "three";
+const k = { type: "change" }, A = { type: "start" }, K = { type: "end" }, M = new q(), N = new G(), $ = Math.cos(70 * B.DEG2RAD), d = new f(), m = 2 * Math.PI, r = {
   NONE: -1,
   ROTATE: 0,
   DOLLY: 1,
@@ -9,8 +9,8 @@ const k = { type: "change" }, R = { type: "start" }, K = { type: "end" }, T = ne
   TOUCH_PAN: 4,
   TOUCH_DOLLY_PAN: 5,
   TOUCH_DOLLY_ROTATE: 6
-}, O = 1e-6;
-class J extends v {
+}, R = 1e-6;
+class J extends X {
   /**
    * Constructs a new controls instance.
    *
@@ -86,12 +86,12 @@ class J extends v {
     d.copy(e).sub(this.target), d.applyQuaternion(this._quat), this._spherical.setFromVector3(d), this.autoRotate && this.state === r.NONE && this._rotateLeft(this._getAutoRotationAngle(t)), this.enableDamping ? (this._spherical.theta += this._sphericalDelta.theta * this.dampingFactor, this._spherical.phi += this._sphericalDelta.phi * this.dampingFactor) : (this._spherical.theta += this._sphericalDelta.theta, this._spherical.phi += this._sphericalDelta.phi);
     let i = this.minAzimuthAngle, o = this.maxAzimuthAngle;
     isFinite(i) && isFinite(o) && (i < -Math.PI ? i += m : i > Math.PI && (i -= m), o < -Math.PI ? o += m : o > Math.PI && (o -= m), i <= o ? this._spherical.theta = Math.max(i, Math.min(o, this._spherical.theta)) : this._spherical.theta = this._spherical.theta > (i + o) / 2 ? Math.max(i, this._spherical.theta) : Math.min(o, this._spherical.theta)), this._spherical.phi = Math.max(this.minPolarAngle, Math.min(this.maxPolarAngle, this._spherical.phi)), this._spherical.makeSafe(), this.enableDamping === !0 ? this.target.addScaledVector(this._panOffset, this.dampingFactor) : this.target.add(this._panOffset), this.target.sub(this.cursor), this.target.clampLength(this.minTargetRadius, this.maxTargetRadius), this.target.add(this.cursor);
-    let h = !1;
+    let a = !1;
     if (this.zoomToCursor && this._performCursorZoom || this.object.isOrthographicCamera)
       this._spherical.radius = this._clampDistance(this._spherical.radius);
     else {
       const n = this._spherical.radius;
-      this._spherical.radius = this._clampDistance(this._spherical.radius * this._scale), h = n != this._spherical.radius;
+      this._spherical.radius = this._clampDistance(this._spherical.radius * this._scale), a = n != this._spherical.radius;
     }
     if (d.setFromSpherical(this._spherical), d.applyQuaternion(this._quatInverse), e.copy(this.target).add(d), this.object.lookAt(this.target), this.enableDamping === !0 ? (this._sphericalDelta.theta *= 1 - this.dampingFactor, this._sphericalDelta.phi *= 1 - this.dampingFactor, this._panOffset.multiplyScalar(1 - this.dampingFactor)) : (this._sphericalDelta.set(0, 0, 0), this._panOffset.set(0, 0, 0)), this.zoomToCursor && this._performCursorZoom) {
       let n = null;
@@ -99,22 +99,22 @@ class J extends v {
         const c = d.length();
         n = this._clampDistance(c * this._scale);
         const p = c - n;
-        this.object.position.addScaledVector(this._dollyDirection, p), this.object.updateMatrixWorld(), h = !!p;
+        this.object.position.addScaledVector(this._dollyDirection, p), this.object.updateMatrixWorld(), a = !!p;
       } else if (this.object.isOrthographicCamera) {
         const c = new f(this._mouse.x, this._mouse.y, 0);
         c.unproject(this.object);
         const p = this.object.zoom;
-        this.object.zoom = Math.max(this.minZoom, Math.min(this.maxZoom, this.object.zoom / this._scale)), this.object.updateProjectionMatrix(), h = p !== this.object.zoom;
+        this.object.zoom = Math.max(this.minZoom, Math.min(this.maxZoom, this.object.zoom / this._scale)), this.object.updateProjectionMatrix(), a = p !== this.object.zoom;
         const w = new f(this._mouse.x, this._mouse.y, 0);
         w.unproject(this.object), this.object.position.sub(w).add(c), this.object.updateMatrixWorld(), n = d.length();
       } else
         console.warn("WARNING: OrbitControls.js encountered an unknown camera type - zoom to cursor disabled."), this.zoomToCursor = !1;
-      n !== null && (this.screenSpacePanning ? this.target.set(0, 0, -1).transformDirection(this.object.matrix).multiplyScalar(n).add(this.object.position) : (T.origin.copy(this.object.position), T.direction.set(0, 0, -1).transformDirection(this.object.matrix), Math.abs(this.object.up.dot(T.direction)) < $ ? this.object.lookAt(this.target) : (N.setFromNormalAndCoplanarPoint(this.object.up, this.target), T.intersectPlane(N, this.target))));
+      n !== null && (this.screenSpacePanning ? this.target.set(0, 0, -1).transformDirection(this.object.matrix).multiplyScalar(n).add(this.object.position) : (M.origin.copy(this.object.position), M.direction.set(0, 0, -1).transformDirection(this.object.matrix), Math.abs(this.object.up.dot(M.direction)) < $ ? this.object.lookAt(this.target) : (N.setFromNormalAndCoplanarPoint(this.object.up, this.target), M.intersectPlane(N, this.target))));
     } else if (this.object.isOrthographicCamera) {
       const n = this.object.zoom;
-      this.object.zoom = Math.max(this.minZoom, Math.min(this.maxZoom, this.object.zoom / this._scale)), n !== this.object.zoom && (this.object.updateProjectionMatrix(), h = !0);
+      this.object.zoom = Math.max(this.minZoom, Math.min(this.maxZoom, this.object.zoom / this._scale)), n !== this.object.zoom && (this.object.updateProjectionMatrix(), a = !0);
     }
-    return this._scale = 1, this._performCursorZoom = !1, h || this._lastPosition.distanceToSquared(this.object.position) > O || 8 * (1 - this._lastQuaternion.dot(this.object.quaternion)) > O || this._lastTargetPosition.distanceToSquared(this.target) > O ? (this.dispatchEvent(k), this._lastPosition.copy(this.object.position), this._lastQuaternion.copy(this.object.quaternion), this._lastTargetPosition.copy(this.target), !0) : !1;
+    return this._scale = 1, this._performCursorZoom = !1, a || this._lastPosition.distanceToSquared(this.object.position) > R || 8 * (1 - this._lastQuaternion.dot(this.object.quaternion)) > R || this._lastTargetPosition.distanceToSquared(this.target) > R ? (this.dispatchEvent(k), this._lastPosition.copy(this.object.position), this._lastQuaternion.copy(this.object.quaternion), this._lastTargetPosition.copy(this.target), !0) : !1;
   }
   _getAutoRotationAngle(t) {
     return t !== null ? m / 60 * this.autoRotateSpeed * t : m / 60 / 60 * this.autoRotateSpeed;
@@ -141,8 +141,8 @@ class J extends v {
     if (this.object.isPerspectiveCamera) {
       const o = this.object.position;
       d.copy(o).sub(this.target);
-      let h = d.length();
-      h *= Math.tan(this.object.fov / 2 * Math.PI / 180), this._panLeft(2 * t * h / i.clientHeight, this.object.matrix), this._panUp(2 * e * h / i.clientHeight, this.object.matrix);
+      let a = d.length();
+      a *= Math.tan(this.object.fov / 2 * Math.PI / 180), this._panLeft(2 * t * a / i.clientHeight, this.object.matrix), this._panUp(2 * e * a / i.clientHeight, this.object.matrix);
     } else this.object.isOrthographicCamera ? (this._panLeft(t * (this.object.right - this.object.left) / this.object.zoom / i.clientWidth, this.object.matrix), this._panUp(e * (this.object.top - this.object.bottom) / this.object.zoom / i.clientHeight, this.object.matrix)) : (console.warn("WARNING: OrbitControls.js encountered an unknown camera type - pan disabled."), this.enablePan = !1);
   }
   _dollyOut(t) {
@@ -155,8 +155,8 @@ class J extends v {
     if (!this.zoomToCursor)
       return;
     this._performCursorZoom = !0;
-    const i = this.domElement.getBoundingClientRect(), o = t - i.left, h = e - i.top, n = i.width, c = i.height;
-    this._mouse.x = o / n * 2 - 1, this._mouse.y = -(h / c) * 2 + 1, this._dollyDirection.set(this._mouse.x, this._mouse.y, 1).unproject(this.object).sub(this.object.position).normalize();
+    const i = this.domElement.getBoundingClientRect(), o = t - i.left, a = e - i.top, n = i.width, c = i.height;
+    this._mouse.x = o / n * 2 - 1, this._mouse.y = -(a / c) * 2 + 1, this._dollyDirection.set(this._mouse.x, this._mouse.y, 1).unproject(this.object).sub(this.object.position).normalize();
   }
   _clampDistance(t) {
     return Math.max(this.minDistance, Math.min(this.maxDistance, t));
@@ -222,8 +222,8 @@ class J extends v {
     }
   }
   _handleTouchStartDolly(t) {
-    const e = this._getSecondPointerPosition(t), i = t.pageX - e.x, o = t.pageY - e.y, h = Math.sqrt(i * i + o * o);
-    this._dollyStart.set(0, h);
+    const e = this._getSecondPointerPosition(t), i = t.pageX - e.x, o = t.pageY - e.y, a = Math.sqrt(i * i + o * o);
+    this._dollyStart.set(0, a);
   }
   _handleTouchStartDollyPan(t) {
     this.enableZoom && this._handleTouchStartDolly(t), this.enablePan && this._handleTouchStartPan(t);
@@ -235,8 +235,8 @@ class J extends v {
     if (this._pointers.length == 1)
       this._rotateEnd.set(t.pageX, t.pageY);
     else {
-      const i = this._getSecondPointerPosition(t), o = 0.5 * (t.pageX + i.x), h = 0.5 * (t.pageY + i.y);
-      this._rotateEnd.set(o, h);
+      const i = this._getSecondPointerPosition(t), o = 0.5 * (t.pageX + i.x), a = 0.5 * (t.pageY + i.y);
+      this._rotateEnd.set(o, a);
     }
     this._rotateDelta.subVectors(this._rotateEnd, this._rotateStart).multiplyScalar(this.rotateSpeed);
     const e = this.domElement;
@@ -252,8 +252,8 @@ class J extends v {
     this._panDelta.subVectors(this._panEnd, this._panStart).multiplyScalar(this.panSpeed), this._pan(this._panDelta.x, this._panDelta.y), this._panStart.copy(this._panEnd);
   }
   _handleTouchMoveDolly(t) {
-    const e = this._getSecondPointerPosition(t), i = t.pageX - e.x, o = t.pageY - e.y, h = Math.sqrt(i * i + o * o);
-    this._dollyEnd.set(0, h), this._dollyDelta.set(0, Math.pow(this._dollyEnd.y / this._dollyStart.y, this.zoomSpeed)), this._dollyOut(this._dollyDelta.y), this._dollyStart.copy(this._dollyEnd);
+    const e = this._getSecondPointerPosition(t), i = t.pageX - e.x, o = t.pageY - e.y, a = Math.sqrt(i * i + o * o);
+    this._dollyEnd.set(0, a), this._dollyDelta.set(0, Math.pow(this._dollyEnd.y / this._dollyStart.y, this.zoomSpeed)), this._dollyOut(this._dollyDelta.y), this._dollyStart.copy(this._dollyEnd);
     const n = (t.pageX + e.x) * 0.5, c = (t.pageY + e.y) * 0.5;
     this._updateZoomParameters(n, c);
   }
@@ -364,7 +364,7 @@ function st(s) {
     default:
       this.state = r.NONE;
   }
-  this.state !== r.NONE && this.dispatchEvent(R);
+  this.state !== r.NONE && this.dispatchEvent(A);
 }
 function ot(s) {
   switch (this.state) {
@@ -383,7 +383,7 @@ function ot(s) {
   }
 }
 function nt(s) {
-  this.enabled === !1 || this.enableZoom === !1 || this.state !== r.NONE || (s.preventDefault(), this.dispatchEvent(R), this._handleMouseWheel(this._customWheelEvent(s)), this.dispatchEvent(K));
+  this.enabled === !1 || this.enableZoom === !1 || this.state !== r.NONE || (s.preventDefault(), this.dispatchEvent(A), this._handleMouseWheel(this._customWheelEvent(s)), this.dispatchEvent(K));
 }
 function at(s) {
   this.enabled !== !1 && this._handleKeyDown(s);
@@ -421,7 +421,7 @@ function ht(s) {
     default:
       this.state = r.NONE;
   }
-  this.state !== r.NONE && this.dispatchEvent(R);
+  this.state !== r.NONE && this.dispatchEvent(A);
 }
 function rt(s) {
   switch (this._trackPointer(s), this.state) {
@@ -480,7 +480,7 @@ class ut {
    */
   constructor(t = {}) {
     const e = this;
-    let i, o, h, n;
+    let i, o, a, n;
     const c = {
       objects: /* @__PURE__ */ new WeakMap()
     }, p = t.element !== void 0 ? t.element : document.createElement("div");
@@ -489,48 +489,48 @@ class ut {
         width: i,
         height: o
       };
-    }, this.render = function(a, l) {
-      a.matrixWorldAutoUpdate === !0 && a.updateMatrixWorld(), l.parent === null && l.matrixWorldAutoUpdate === !0 && l.updateMatrixWorld(), I.copy(l.matrixWorldInverse), Y.multiplyMatrices(l.projectionMatrix, I), C(a, a, l), V(a);
-    }, this.setSize = function(a, l) {
-      i = a, o = l, h = i / 2, n = o / 2, p.style.width = a + "px", p.style.height = l + "px";
+    }, this.render = function(h, l) {
+      h.matrixWorldAutoUpdate === !0 && h.updateMatrixWorld(), l.parent === null && l.matrixWorldAutoUpdate === !0 && l.updateMatrixWorld(), I.copy(l.matrixWorldInverse), Y.multiplyMatrices(l.projectionMatrix, I), C(h, h, l), V(h);
+    }, this.setSize = function(h, l) {
+      i = h, o = l, a = i / 2, n = o / 2, p.style.width = h + "px", p.style.height = l + "px";
     };
-    function w(a) {
-      a.isCSS2DObject && (a.element.style.display = "none");
-      for (let l = 0, b = a.children.length; l < b; l++)
-        w(a.children[l]);
+    function w(h) {
+      h.isCSS2DObject && (h.element.style.display = "none");
+      for (let l = 0, b = h.children.length; l < b; l++)
+        w(h.children[l]);
     }
-    function C(a, l, b) {
-      if (a.visible === !1) {
-        w(a);
+    function C(h, l, b) {
+      if (h.visible === !1) {
+        w(h);
         return;
       }
-      if (a.isCSS2DObject) {
-        P.setFromMatrixPosition(a.matrixWorld), P.applyMatrix4(Y);
-        const u = P.z >= -1 && P.z <= 1 && a.layers.test(b.layers) === !0, g = a.element;
-        g.style.display = u === !0 ? "" : "none", u === !0 && (a.onBeforeRender(e, l, b), g.style.transform = "translate(" + -100 * a.center.x + "%," + -100 * a.center.y + "%)translate(" + (P.x * h + h) + "px," + (-P.y * n + n) + "px)", g.parentNode !== p && p.appendChild(g), a.onAfterRender(e, l, b));
-        const M = {
-          distanceToCameraSquared: W(b, a)
+      if (h.isCSS2DObject) {
+        P.setFromMatrixPosition(h.matrixWorld), P.applyMatrix4(Y);
+        const u = P.z >= -1 && P.z <= 1 && h.layers.test(b.layers) === !0, g = h.element;
+        g.style.display = u === !0 ? "" : "none", u === !0 && (h.onBeforeRender(e, l, b), g.style.transform = "translate(" + -100 * h.center.x + "%," + -100 * h.center.y + "%)translate(" + (P.x * a + a) + "px," + (-P.y * n + n) + "px)", g.parentNode !== p && p.appendChild(g), h.onAfterRender(e, l, b));
+        const O = {
+          distanceToCameraSquared: W(b, h)
         };
-        c.objects.set(a, M);
+        c.objects.set(h, O);
       }
-      for (let u = 0, g = a.children.length; u < g; u++)
-        C(a.children[u], l, b);
+      for (let u = 0, g = h.children.length; u < g; u++)
+        C(h.children[u], l, b);
     }
-    function W(a, l) {
-      return U.setFromMatrixPosition(a.matrixWorld), H.setFromMatrixPosition(l.matrixWorld), U.distanceToSquared(H);
+    function W(h, l) {
+      return U.setFromMatrixPosition(h.matrixWorld), H.setFromMatrixPosition(l.matrixWorld), U.distanceToSquared(H);
     }
-    function F(a) {
+    function F(h) {
       const l = [];
-      return a.traverseVisible(function(b) {
+      return h.traverseVisible(function(b) {
         b.isCSS2DObject && l.push(b);
       }), l;
     }
-    function V(a) {
-      const l = F(a).sort(function(u, g) {
+    function V(h) {
+      const l = F(h).sort(function(u, g) {
         if (u.renderOrder !== g.renderOrder)
           return g.renderOrder - u.renderOrder;
-        const M = c.objects.get(u).distanceToCameraSquared, X = c.objects.get(g).distanceToCameraSquared;
-        return M - X;
+        const O = c.objects.get(u).distanceToCameraSquared, v = c.objects.get(g).distanceToCameraSquared;
+        return O - v;
       }), b = l.length;
       for (let u = 0, g = l.length; u < g; u++)
         l[u].element.style.zIndex = b - u;
@@ -542,27 +542,27 @@ class mt {
     this.aspect_ratio = window.innerWidth / window.innerHeight, this.screen_width = window.innerWidth, this.screen_height = window.innerHeight, this.scene = new _.Scene(), this.scene.background = new _.Color(t), this.camera = new _.PerspectiveCamera(75, this.aspect_ratio, 0.1, 1e3), this.camera.position.set(5, 5, 5), this.renderer = new _.WebGLRenderer({ antialias: !0 }), this.renderer.setSize(this.screen_width, this.screen_height), document.body.appendChild(this.renderer.domElement), this.labelRenderer = new ut(), this.labelRenderer.setSize(this.screen_width, this.screen_height), this.labelRenderer.domElement.style.position = "absolute", this.labelRenderer.domElement.style.top = "0", this.labelRenderer.domElement.style.pointerEvents = "none", document.body.appendChild(this.labelRenderer.domElement);
     const o = new _.GridHelper(e, e, 65535, 3355443);
     this.scene.add(o);
-    const h = new _.AxesHelper(i);
-    this.scene.add(h), this.controls = new J(this.camera, this.renderer.domElement), this.controls.enableDamping = !0, this.controls.dampingFactor = 0.05, this.controls.enablePan = !0, this.controls.enableZoom = !0, this.controls.minDistance = 1, this.controls.maxDistance = e / 2, window.addEventListener("resize", () => {
+    const a = new _.AxesHelper(i);
+    this.scene.add(a), this.controls = new J(this.camera, this.renderer.domElement), this.controls.enableDamping = !0, this.controls.dampingFactor = 0.05, this.controls.enablePan = !0, this.controls.enableZoom = !0, this.controls.minDistance = 1, this.controls.maxDistance = e / 2, window.addEventListener("resize", () => {
       this.camera.aspect = window.innerWidth / window.innerHeight, this.camera.updateProjectionMatrix(), this.renderer.setSize(window.innerWidth, window.innerHeight), this.labelRenderer.setSize(window.innerWidth, window.innerHeight);
     }), this.addPoint(0, 0, 0, "Origin");
   }
-  addLabel(t, e, i = "black", o = "white", h = { x: 0.1, y: 0.1, z: 0 }) {
+  addLabel(t, e, i = "black", o = "white", a = { x: 0.1, y: 0.1, z: 0 }) {
     const n = document.createElement("div");
     n.className = "label", n.textContent = t, n.style.color = o, n.style.fontSize = "12px", n.style.fontFamily = "monospace", n.style.backgroundColor = i, n.style.opacity = "0.5", n.style.padding = "2px 4px", n.style.borderRadius = "4px", n.style.whiteSpace = "nowrap";
     const c = new pt(n);
-    c.position.set(h.x, h.y, h.z), e.add(c);
+    c.position.set(a.x, a.y, a.z), e.add(c);
   }
-  addPoint(t, e, i, o = "P", h = "red", n = 0.05) {
-    const c = new _.SphereGeometry(n, 16, 16), p = new _.MeshBasicMaterial({ color: h }), w = new _.Mesh(c, p);
+  addPoint(t, e, i, o = "P", a = "red", n = 0.05) {
+    const c = new _.SphereGeometry(n, 16, 16), p = new _.MeshBasicMaterial({ color: a }), w = new _.Mesh(c, p);
     w.position.set(t, e, i), this.scene.add(w), this.addLabel(`${o}(${t}, ${e}, ${i})`, w);
   }
   addVector(t = { x, y, z }, e = !0, i = {}, o = 16776960) {
-    const h = new _.Vector3(t.x, t.y, t.z);
+    const a = new _.Vector3(t.x, t.y, t.z);
     let n = new _.Vector3(0, 0, 0);
     !e && i && (n = new _.Vector3(i.x, i.y, i.z));
-    const c = h.length(), p = new _.ArrowHelper(h.clone().normalize(), n, c, o);
-    p.vector = h.clone(), this.scene.add(p), this.addPoint(t.x + n.x, t.y + n.y, t.z + n.z, "V");
+    const c = a.length(), p = new _.ArrowHelper(a.clone().normalize(), n, c, o);
+    p.vector = a.clone(), this.scene.add(p), this.addPoint(t.x + n.x, t.y + n.y, t.z + n.z, "V");
   }
   plotSum(t, e) {
     this.addVector(t), this.addVector(e, !1, t), t.add(e), this.addVector(t);
@@ -578,6 +578,10 @@ class mt {
   plotScaled(t, e) {
     t.x *= e, t.y *= e, t.z *= e, this.addVector(t);
   }
+  plotProjection(t, e) {
+    const i = t.dotProduct(e), o = e.value() ** 2, a = new T(e.x, e.y, e.z);
+    a.scale(i / o), this.addVector(a, !0, void 0, 65280);
+  }
   runInloop() {
     const t = () => {
       requestAnimationFrame(t), this.controls.update(), this.renderer.render(this.scene, this.camera), this.labelRenderer.render(this.scene, this.camera);
@@ -585,7 +589,7 @@ class mt {
     t();
   }
 }
-class A {
+class T {
   constructor(t, e, i) {
     this.x = t, this.y = e, this.z = i;
   }
@@ -598,14 +602,29 @@ class A {
   opposite() {
     this.x = -this.x, this.y = -this.y, this.z = -this.z;
   }
+  scale(t) {
+    this.x *= t, this.y *= t, this.z *= t;
+  }
   multiply(t) {
     var e = this.y * t.z - this.z * t.y, i = -(this.x * t.z - this.z * t.x), o = this.x * t.y - this.y * t.x;
-    return new A(e, i, o);
+    return new T(e, i, o);
+  }
+  value() {
+    let t = this.x * this.x + this.y * this.y + this.z * this.z;
+    return Math.sqrt(t);
+  }
+  unitVector() {
+    var t = this.value(), e = this.x / t, i = this.y / t, o = this.z / t;
+    return new T(e, i, o);
+  }
+  dotProduct(t) {
+    var e = this.x * t.x + this.y * t.y + this.z * t.z;
+    return e;
   }
 }
-const ft = { MainFrame: mt, Vector: A };
+const ft = { MainFrame: mt, Vector: T };
 export {
   mt as MainFrame,
-  A as Vector,
+  T as Vector,
   ft as default
 };

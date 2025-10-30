@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 
-export class MainFrame {
+class MainFrame {
   constructor(bg_color = "black", grid_length = 100, axis_length = 7) {
     this.aspect_ratio = window.innerWidth / window.innerHeight;
     this.screen_width = window.innerWidth;
@@ -126,14 +126,14 @@ export class MainFrame {
     vec.z *= k;
     this.addVector(vec);
   }
-
   plotProjection(ofvec1, onvec2){
     const dp = ofvec1.dotProduct(onvec2);
     const lenSq = onvec2.value() ** 2;
     const proj = new Vector(onvec2.x, onvec2.y, onvec2.z);
     proj.scale(dp / lenSq);
-    this.addVector(proj, true, undefined, 0x00ff00);
-  }
+    this.addVector(proj,true,undefined,"green");
+}
+
 
   runInloop() {
     const loop = () => {
@@ -146,7 +146,7 @@ export class MainFrame {
   }
 }
 
-export class Vector {
+class Vector {
   constructor(x, y, z) {
     this.x = x;
     this.y = y;
@@ -170,11 +170,10 @@ export class Vector {
     this.y = -this.y;
     this.z = -this.z;
   }
-
   scale(k){
-    this.x *= k;
-    this.y *= k;
-    this.z *= k;
+    this.x*=k;
+    this.y*=k;
+    this.z*=k;
   }
 
   multiply(vector2) {
@@ -187,12 +186,10 @@ export class Vector {
 
     return new Vector(x, y, z);
   }
-
   value(){
     let val = (this.x*this.x)+(this.y*this.y)+(this.z*this.z);
     return Math.sqrt(val);
   }
-
   unitVector(){
     var val = this.value();
     var x = this.x / val;
@@ -200,12 +197,21 @@ export class Vector {
     var z = this.z / val;
     return new Vector(x,y,z);
   }
-
   dotProduct(vec2){
-    var prod = (this.x * vec2.x)+(this.y * vec2.y)+(this.z * vec2.z);
+    var prod = (this.x * vec2.x)+(this.y *vec2.y)+(this.z * vec2.z);
     return prod;
   }
 }
 
-// Default export for convenience
-export default { MainFrame, Vector };
+var mf = new MainFrame("black", 100, 7);
+var v1 = new Vector(5, 5, 0);
+var v2 = new Vector(10, 0, 0);
+
+mf.addVector(v1);
+mf.addVector(v2);
+mf.plotProjection(v1,v2);
+
+// mf.plotSum(v1, v2);
+// mf.plotDifference(v1, v2);
+// mf.plotCross(v1, v2);
+mf.runInloop();
