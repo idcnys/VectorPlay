@@ -27,12 +27,10 @@ npm install three
 
 ## Quick Start
 
-### Option 1: Using CLI (Recommended for beginners)
-
-Create a new project with template files:
+### Option 1: One-Command Setup (Recommended)
 
 ```bash
-# Create a new directory and project
+# Create in new directory
 npx vectorplay@latest create my-vector-app
 cd my-vector-app
 npm run dev
@@ -42,18 +40,36 @@ npx vectorplay@latest create .
 npm run dev
 ```
 
-That's it! The CLI automatically:
+**What this does automatically:**
 
 - Creates template files (`index.html`, `main.js`, `package.json`)
 - Installs all dependencies (`vectorplay`, `three`, `vite`)
 - Sets up the development environment
 
-Then just run `npm run dev` and open http://localhost:5173
+### Option 2: Manual Setup (Alternative)
 
-### Option 2: Manual setup
+If you prefer manual control or the automatic setup doesn't work:
 
 ```bash
-npm install vectorplay
+# Step 1: Initialize project
+npm init -y
+
+# Step 2: Install dependencies
+npm install three vite vectorplay
+
+# Step 3: Create template files
+npx vectorplay@latest create .
+
+# Step 4: Run the app
+npx vite
+```
+
+**Note:** With manual setup, use `npx vite` instead of `npm run dev`
+
+### Option 3: From Scratch
+
+```bash
+npm install vectorplay three
 ```
 
 ```javascript
@@ -314,7 +330,14 @@ The CLI will:
 - Automatically install all dependencies (`vectorplay`, `three`, `vite`)
 - Set up a ready-to-run development environment
 
-Just run `npm run dev` after the CLI finishes!
+**If automatic setup works:** Just run `npm run dev` after the CLI finishes!
+
+**If you need manual setup:** Use the 4-step process:
+
+1. `npm init -y`
+2. `npm install three vite vectorplay`
+3. `npx vectorplay@latest create .`
+4. `npx vite` (to run the app)
 
 ## Browser Usage
 

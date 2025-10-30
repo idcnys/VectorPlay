@@ -88,13 +88,9 @@ function copyTemplate() {
     
     console.log(`
 🎉 VectorPlay project created successfully!
-
-Next steps:
-  ${targetDir !== '.' ? `cd ${targetDir}` : ''}
-  npm run dev
-
-Open http://localhost:5173 in your browser to see your VectorPlay app!
-    `);
+ run - npx vite ,
+ 
+`);
     
   } catch (error) {
     console.error('Error creating project:', error.message);

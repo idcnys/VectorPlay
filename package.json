@@ -1,6 +1,6 @@
 {
   "name": "vectorplay",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "A 3D vector simulation and visualization library built with Three.js for educational purposes",
   "main": "dist/vectorplay.js",
   "module": "src/index.js",
