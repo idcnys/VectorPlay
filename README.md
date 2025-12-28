@@ -14,16 +14,8 @@ A powerful 3D vector simulation and visualization library built with Three.js fo
 
 ## Installation
 
-```bash
-npm install vectorplay
-```
-
 **Peer Dependencies:**
 Make sure you have Three.js installed:
-
-```bash
-npm install three
-```
 
 ## Quick Start
 
@@ -45,53 +37,6 @@ npm run dev
 - Creates template files (`index.html`, `main.js`, `package.json`)
 - Installs all dependencies (`vectorplay`, `three`, `vite`)
 - Sets up the development environment
-
-### Option 2: Manual Setup (Alternative)
-
-If you prefer manual control or the automatic setup doesn't work:
-
-```bash
-# Step 1: Initialize project
-npm init -y
-
-# Step 2: Install dependencies
-npm install three vite vectorplay
-
-# Step 3: Create template files
-npx vectorplay@latest create .
-
-# Step 4: Run the app
-npx vite
-```
-
-**Note:** With manual setup, use `npx vite` instead of `npm run dev`
-
-### Option 3: From Scratch
-
-```bash
-npm install vectorplay three
-```
-
-```javascript
-import { MainFrame, Vector } from "vectorplay";
-
-// Create a 3D scene
-const scene = new MainFrame("black", 50, 5);
-
-// Create vectors
-const vec1 = new Vector(3, 2, 1);
-const vec2 = new Vector(1, 4, 2);
-
-// Add vectors to the scene
-scene.addVector(vec1);
-scene.addVector(vec2);
-
-// Visualize vector addition
-scene.plotSum(vec1, vec2);
-
-// Start the animation loop
-scene.runInloop();
-```
 
 ## API Reference
 
@@ -374,34 +319,6 @@ For direct browser usage without a bundler:
 - Three.js ^0.180.0
 - Modern browser with ES6 module support
 - WebGL support
-
-## Changelog
-
-### Version 1.1.0 (Latest)
-
-- ✨ **New Vector Methods:**
-  - `scale(k)`: Scale vector by factor k
-  - `value()`: Calculate vector magnitude
-  - `unitVector()`: Get normalized unit vector
-  - `dotProduct(vector)`: Calculate dot product with another vector
-- ✨ **New Visualization:**
-  - `plotProjection(vec1, vec2)`: Visualize vector projection
-- 🎨 **Improved API**: More comprehensive vector mathematics support
-
-### Version 1.0.0
-
-- 🎉 Initial release
-- Basic vector visualization and operations
-- Vector addition, subtraction, cross product
-- 3D scene management with Three.js
-
-## License
-
-MIT License
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Issues
 
