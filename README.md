@@ -2,6 +2,17 @@
 
 A powerful 3D vector simulation and visualization library built with Three.js for educational purposes. VectorPlay makes it easy to visualize vectors, coordinate systems, and mathematical operations in 3D space.
 
+## Examples
+
+| Addition of Vectors | Substraction of Vectors |
+| :---: | :---: |
+| <img width="250" alt="Addition" src="https://github.com/user-attachments/assets/bfeb6c97-d008-4ded-9bcf-b4dd06a0c8c2" /> | <img width="250" alt="Substraction" src="https://github.com/user-attachments/assets/b5b63f12-8131-4b3f-abd3-306c2c33e254" /> |
+
+| Projection of Vectors | Cross Products |
+| :---: | :---: |
+| <img width="250" alt="Projection" src="https://github.com/user-attachments/assets/afca28bd-6508-437b-bc7f-e07799e4fbf7" /> | <img width="250" alt="Cross Product" src="https://github.com/user-attachments/assets/967232d9-62e9-460a-b4d4-eaf47de85b58" /> |
+
+
 ## Features
 
 - 🎯 **3D Vector Visualization**: Render vectors as arrows in 3D space
@@ -11,6 +22,7 @@ A powerful 3D vector simulation and visualization library built with Three.js fo
 - 🎮 **Interactive Controls**: Built-in orbit controls for exploring 3D scenes
 - 📏 **Grid and Axis Helpers**: Visual reference system with customizable grid and axes
 - 🎨 **Customizable Appearance**: Configure colors, sizes, and styling
+
 
 ## Installation
 
